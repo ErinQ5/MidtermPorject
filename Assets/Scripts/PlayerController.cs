@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : NetworkBehaviour {
 	private Transform Player_View;
 	private Transform Player_Camera;
 
@@ -32,6 +33,12 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 cameraPositionDefault;
 	private float cameraHeight;
 
+	//public GameObject playerHolder, weaponHolder;
+	//public GameObject[] weapons_FPS;
+	private Camera mainCam;
+	public PlayerViewController[] mouseLook;
+
+
 	// Use this for initialization
 	void Start () {
 		Player_View = transform.Find ("View Handle").transform;
@@ -42,10 +49,50 @@ public class PlayerController : MonoBehaviour {
 		myRayDistance = charController.height * 0.5f + charController.radius;
 		controllerHeightDefault = charController.height;
 		cameraPositionDefault = Player_View.localPosition;
+
+		/*if(isLocalPlayer){
+			playerHolder.layer = LayerMask.NameToLayer ("player");
+
+			foreach (Transform child in playerHolder.transform) {
+				child.gameObject.layer = LayerMask.NameToLayer ("player");
+			}
+		}
+
+		if(!isLocalPlayer){
+			playerHolder.layer = LayerMask.NameToLayer ("enemy");
+
+			foreach(Transform child in playerHolder.transform){
+				child.gameObject.layer = LayerMask.NameToLayer ("enemy");
+			}
+				
+		}*/
+
+		if(!isLocalPlayer){
+			for (int i = 0; i < mouseLook.Length; i++){
+				mouseLook [i].enabled = false;
+			}
+		}
+
+		mainCam = transform.Find ("View Handle").Find ("Player Camera").GetComponent<Camera> ();
+		mainCam.gameObject.SetActive (false);
+	}
+
+	public override void OnStartLocalPlayer(){
+		tag = "Player";
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if(isLocalPlayer){
+			if(!mainCam.gameObject.activeInHierarchy){
+				mainCam.gameObject.SetActive (true);
+			}
+		}
+
+		if(!isLocalPlayer){
+			return;
+		}
 		PlayerMove ();
 	}
 
