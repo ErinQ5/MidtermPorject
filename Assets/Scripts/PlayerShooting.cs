@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerShooting : MonoBehaviour {
-
+	
 	private Camera cam;
 
 	private float fireRate = 15f;
 	private float nextTimeToFire = 0f;
 	public GameObject Bullet;
 	public Transform shootPoint;
+	//public GameObject enemyObject;
 
 	[SerializeField]
 	private GameObject Bullet_smoke;
@@ -31,7 +32,7 @@ public class PlayerShooting : MonoBehaviour {
 			nextTimeToFire = Time.time + 1f / fireRate;
 
 			RaycastHit hit;
-			Debug.Log ("Shake");
+
 			//cam.gameObject.GetComponent<PlayerViewController> ().UptiltCamera(50f);
 			//Debug.DrawRay (cam.transform.position, cam.transform.forward, Color.yellow);
 
@@ -43,10 +44,11 @@ public class PlayerShooting : MonoBehaviour {
 
 				
 
-				if (hit.transform.tag == "target") {
+				if (hit.transform.tag == "enemy") {
 					Instantiate (Bullet_smoke, hit.point, Quaternion.LookRotation (hit.normal));
-					//Invoke (instantiateSth (), 1f);
-					hit.transform.gameObject.GetComponent<Renderer> ().material.color = Color.red;
+					Debug.Log ("Shot the enemy");
+					hit.transform.gameObject.GetComponent<EnemyHealth>().enemyHealth -= 10f;
+
 
 				} else if (hit.transform.tag == "Reset"){
 					SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);

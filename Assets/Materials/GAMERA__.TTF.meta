@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: bf9cb64d621b9064c913f6082935e9e2
+timeCreated: 1508103473
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Gamera
+  fontNames:
+  - Gamera
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

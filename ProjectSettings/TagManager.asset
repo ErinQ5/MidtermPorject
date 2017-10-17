@@ -6,6 +6,7 @@ TagManager:
   tags:
   - target
   - Reset
+  - enemy
   layers:
   - Default
   - TransparentFX
