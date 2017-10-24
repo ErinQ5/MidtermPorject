@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour {
 	public float toPlayerDistance;
-	public float enemyLookRange = 30f;
+	public float enemyLookRange = 20f;
 	public float rayAttackDistance = 30f;
-	public float enemySpeed = 6f;
+	public float enemySpeed = 15f;
 	public float damping = 5f;
 	public Transform thePlayer;
 	Rigidbody rig;
@@ -44,7 +44,9 @@ public class EnemyAI : MonoBehaviour {
 	}
 
 	void turnToPlayer(){
-		Quaternion rot = Quaternion.LookRotation (thePlayer.position - transform.position);
+		Vector3 dir = (thePlayer.position - transform.position).normalized;
+		dir.y = 0;
+		Quaternion rot = Quaternion.LookRotation (dir);
 		transform.rotation = Quaternion.Slerp (transform.rotation, rot, damping * Time.deltaTime);
 	}
 

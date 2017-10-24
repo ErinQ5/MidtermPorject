@@ -9,16 +9,17 @@ public class GameEndControll : MonoBehaviour {
 	public Transform EndTextObject;
 	public float bedToPlayerDis;
 	public Transform thePlayer;
+	public GameObject myLight;
 	// Use this for initialization
 	void Start () {
 		endText = EndTextObject.GetComponent<Text> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	void Update(){
 		bedToPlayerDis = Vector3.Distance (thePlayer.position, transform.position);
-		if(bedToPlayerDis <= 7){
-			endText.text = "You Finally Fall Asleep :), to restart press B";
+		if(bedToPlayerDis <= 5){
+			endText.text = "Finally Fall Asleep :), but itś already morning, to restart press B";
+			myLight.transform.rotation = Quaternion.Euler (-185.87f, -30.109f, 1.18299f);
 			if(Input.GetKeyDown(KeyCode.B)){
 				LoadScene ("StartScene");
 			}

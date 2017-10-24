@@ -19,10 +19,10 @@ public class PlayerHealth : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter(Collision col){
+	void OnCollisionStay(Collision col){
 		if(col.collider.tag == "enemy"){
 			Debug.Log ("The enemy Hit you");
-			playerHealth -= enemyAttackPower;
+			playerHealth -= enemyAttackPower * Time.deltaTime;
 		}
 		if(playerHealth <= 0f){
 			

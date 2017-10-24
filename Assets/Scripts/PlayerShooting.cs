@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerShooting : MonoBehaviour {
 	
 	private Camera cam;
-
+	public AudioSource shootM;
 	private float fireRate = 15f;
 	private float nextTimeToFire = 0f;
 	public GameObject Bullet;
@@ -29,10 +29,11 @@ public class PlayerShooting : MonoBehaviour {
 
 	void Shoot(){
 		if (Input.GetMouseButtonDown (0) && Time.time > nextTimeToFire) {
+			
 			nextTimeToFire = Time.time + 1f / fireRate;
 
 			RaycastHit hit;
-
+			shootM.Play ();
 			//cam.gameObject.GetComponent<PlayerViewController> ().UptiltCamera(50f);
 			//Debug.DrawRay (cam.transform.position, cam.transform.forward, Color.yellow);
 
